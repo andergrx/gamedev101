@@ -11,6 +11,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.gabe.uyen.game.graphics.Screen;
+import com.gabe.uyen.game.input.Keyboard;
 
 public class Game extends Canvas implements Runnable {
 
@@ -27,6 +28,7 @@ public class Game extends Canvas implements Runnable {
 	private boolean running = false;
 
 	private Screen screen;
+	private Keyboard key;
 	
 	private BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -37,6 +39,9 @@ public class Game extends Canvas implements Runnable {
 
 		screen = new Screen(width,height);
 		frame = new JFrame();
+		
+		key = new Keyboard();		
+		addKeyListener(key);
 	}
 
 	public synchronized void start() {
@@ -87,7 +92,15 @@ public class Game extends Canvas implements Runnable {
 		stop();
 	}
 
+	int x=0, y=0;
 	public void update() {
+		key.update();
+		if(key.up) y++;
+		if(key.down) y--;
+		if(key.right) x--;
+		if(key.left) x++;
+		
+		
 
 	}
 
@@ -98,7 +111,7 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		screen.clear();
-		screen.render();
+		screen.render(x,y);
 		
 		System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
 		
