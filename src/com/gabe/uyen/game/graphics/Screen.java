@@ -3,15 +3,19 @@ package com.gabe.uyen.game.graphics;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.gabe.uyen.game.level.tile.Tile;
+
 public class Screen {
 
-	private int width, height;
+	public int width, height;
 	private Random random = new Random();
 
 	public int[] pixels;
 	public final int MAP_SIZE = 64;
 	public final int MAP_SIZE_MASK = MAP_SIZE - 1;
 
+	public int xOffset, yOffset;
+	
 	public int[] tiles = new int[MAP_SIZE * MAP_SIZE];
 
 	public Screen(int width, int height) {
@@ -28,19 +32,26 @@ public class Screen {
 		Arrays.fill(pixels, 0);
 	}
 
-	public void render(int xo, int yo) {
-		for (int y = 0; y < height; ++y) {
-			int yp = y + yo;
-			if(yp < 0 || yp >= height) continue;
+	public void renderTile(int xp, int yp, Tile tile) {
+		xp -= xOffset;
+		yp -= yOffset;
+		
+		for (int y = 0; y < tile.sprite.SIZE; ++y) {
+			int ya = y + yp;
+			if (ya < 0 || ya >= height) continue;
 			
-			for (int x = 0; x < width; ++x) {
-				int xp = x + xo;
-				if(xp < 0 || xp >= width) continue;
+			for (int x = 0; x < tile.sprite.SIZE; ++x) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= width) continue;
 				
-				pixels[yp * width + xp] = Sprite.grass.pixels[(x & 15) + (y & 15) * Sprite.grass.SIZE];
+				pixels[ya * width + xa] = tile.sprite.pixels[y * tile.sprite.SIZE + x];
 			}
 		}
-
+	}
+	
+	public void setOffset(int xOffset, int yOffset) {
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 
 }

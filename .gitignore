@@ -1,5 +1,2 @@
-bin/com/gabe/uyen/game/Game.class
-bin/com/gabe/uyen/game/graphics/Screen.class
-bin/com/gabe/uyen/game/graphics/Sprite.class
-bin/com/gabe/uyen/game/graphics/SpriteSheet.class
-bin/com/gabe/uyen/game/input/Keyboard.class
+*.class
+
