@@ -54,15 +54,17 @@ public class Screen {
 		xp -= xOffset;
 		yp -= yOffset;
 
-		for (int y = 0; y < 16; ++y) {
+		for (int y = 0; y < 32; ++y) {
 			int ya = y + yp;
 			if (ya < 0 || ya >= height) continue;
 
-			for (int x = 0; x < 16; ++x) {
+			for (int x = 0; x < 32; ++x) {
 				int xa = x + xp;
 				if (xa < 0 || xa >= width) continue;
 
-				pixels[ya * width + xa] = sprite.pixels[y * 16 + x];
+				int playerColor = sprite.pixels[y * 32 + x];
+				
+				if(playerColor != 0x00ffffff) pixels[ya * width + xa] = playerColor;
 			}
 		}
 

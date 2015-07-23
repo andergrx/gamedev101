@@ -7,15 +7,18 @@ import com.gabe.uyen.game.input.Keyboard;
 public class Player extends Mob {
 
 	private Keyboard input;
+	private Sprite sprite;
 
 	public Player(Keyboard input) {
 		this.input = input;
+		sprite = Sprite.player_up;
 	}
 
 	public Player(int x, int y, Keyboard input) {
 		this.x = x;
 		this.y = y;
 		this.input = input;
+		sprite = Sprite.player_up;
 	}
 
 	public void update() {
@@ -30,6 +33,11 @@ public class Player extends Mob {
 	}
 
 	public void render(Screen screen) {
-		screen.renderPlayer(x, y, Sprite.player0);
+		if(dir == 0) sprite = Sprite.player_up;
+		if(dir == 1) sprite = Sprite.player_right;
+		if(dir == 2) sprite = Sprite.player_down;
+		if(dir == 3) sprite = Sprite.player_left;
+
+		screen.renderPlayer(x - 16, y - 16, sprite);
 	}
 }

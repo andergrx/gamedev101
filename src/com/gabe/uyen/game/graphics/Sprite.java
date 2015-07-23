@@ -12,11 +12,14 @@ public class Sprite {
 
 	public static Sprite grass = new Sprite(16, 5, 3, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x1b34f2);
-	
-	public static Sprite player0 = new Sprite(16, 4, 0, SpriteSheet.characters);
-	public static Sprite player1 = new Sprite(16, 3, 3, SpriteSheet.characters);
-	public static Sprite player2 = new Sprite(16, 5, 0, SpriteSheet.characters);
-	public static Sprite player3 = new Sprite(16, 1, 8, SpriteSheet.characters);
+
+	private final static int PLAYER_POSITION_X = 3;
+	private final static int PLAYER_POSITION_Y = 0;
+
+	public static Sprite player_up = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 3, SpriteSheet.characters);
+	public static Sprite player_down = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y, SpriteSheet.characters);
+	public static Sprite player_left = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 1, SpriteSheet.characters);
+	public static Sprite player_right = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 2, SpriteSheet.characters);
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
