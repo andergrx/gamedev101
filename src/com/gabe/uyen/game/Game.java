@@ -9,6 +9,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.gabe.uyen.game.entity.mob.Player;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.input.Keyboard;
 import com.gabe.uyen.game.level.Level;
@@ -31,20 +32,23 @@ public class Game extends Canvas implements Runnable {
 	private Screen screen;
 	private Keyboard key;
 	private Level level;
-	
-	private BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_RGB);
+	private Player player;
+
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
 	public Game() {
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 
-		screen = new Screen(width,height);
+		screen = new Screen(width, height);
 		frame = new JFrame();
-		level = new RandomLevel(64,64);
-		
-		key = new Keyboard();		
+		key = new Keyboard();
+		level = new RandomLevel(64, 64);
+		player = new Player(key);
+
 		addKeyListener(key);
+
 	}
 
 	public synchronized void start() {
@@ -71,24 +75,24 @@ public class Game extends Canvas implements Runnable {
 		final double ns = 1000000000.0 / 60.0;
 		double delta = 0;
 		int frames = 0, updates = 0;
-		
+
 		requestFocus();
 		while (running) {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
-			
-			while(delta >= 1){
+
+			while (delta >= 1) {
 				update();
 				++updates;
 				--delta;
 			}
 			render();
 			++frames;
-			
-			if(System.currentTimeMillis() - timer > 1000) {
+
+			if (System.currentTimeMillis() - timer > 1000) {
 				timer += (System.currentTimeMillis() - timer);
-				//System.out.println(updates + " ups, " + frames + " fps");
+				// System.out.println(updates + " ups, " + frames + " fps");
 				frame.setTitle(title + ": " + updates + " ups, " + frames + " fps");
 				updates = frames = 0;
 			}
@@ -96,13 +100,9 @@ public class Game extends Canvas implements Runnable {
 		stop();
 	}
 
-	int x=0, y=0;
 	public void update() {
 		key.update();
-		if(key.up) y--;
-		if(key.down) y++;
-		if(key.right) x++;
-		if(key.left) x--;
+		player.update();
 
 	}
 
@@ -113,10 +113,13 @@ public class Game extends Canvas implements Runnable {
 			return;
 		}
 		screen.clear();
-		level.render(x, y, screen);
-		
+		int xScroll = player.x - screen.width / 2;
+		int yScroll = player.y - screen.height / 2;
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
+
 		System.arraycopy(screen.pixels, 0, pixels, 0, pixels.length);
-		
+
 		Graphics g = bstrat.getDrawGraphics();
 
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
