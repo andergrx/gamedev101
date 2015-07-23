@@ -13,13 +13,24 @@ public class Sprite {
 	public static Sprite grass = new Sprite(16, 5, 3, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x1b34f2);
 
-	private final static int PLAYER_POSITION_X = 3;
+	private final static int PLAYER_POSITION_X = 4;
 	private final static int PLAYER_POSITION_Y = 0;
 
 	public static Sprite player_up = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 3, SpriteSheet.characters);
+	public static Sprite player_up_1 = new Sprite(32, PLAYER_POSITION_X - 1, PLAYER_POSITION_Y + 3, SpriteSheet.characters);
+	public static Sprite player_up_2 = new Sprite(32, PLAYER_POSITION_X + 1, PLAYER_POSITION_Y + 3, SpriteSheet.characters);
+
 	public static Sprite player_down = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y, SpriteSheet.characters);
+	public static Sprite player_down_1 = new Sprite(32, PLAYER_POSITION_X - 1, PLAYER_POSITION_Y, SpriteSheet.characters);
+	public static Sprite player_down_2 = new Sprite(32, PLAYER_POSITION_X + 1, PLAYER_POSITION_Y, SpriteSheet.characters);
+
 	public static Sprite player_left = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 1, SpriteSheet.characters);
+	public static Sprite player_left_1 = new Sprite(32, PLAYER_POSITION_X - 1, PLAYER_POSITION_Y + 1, SpriteSheet.characters);
+	public static Sprite player_left_2 = new Sprite(32, PLAYER_POSITION_X + 1, PLAYER_POSITION_Y + 1, SpriteSheet.characters);
+
 	public static Sprite player_right = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 2, SpriteSheet.characters);
+	public static Sprite player_right_1 = new Sprite(32, PLAYER_POSITION_X - 1, PLAYER_POSITION_Y + 2, SpriteSheet.characters);
+	public static Sprite player_right_2 = new Sprite(32, PLAYER_POSITION_X + 1, PLAYER_POSITION_Y + 2, SpriteSheet.characters);
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
@@ -50,5 +61,4 @@ public class Sprite {
 			}
 		}
 	}
-
 }
