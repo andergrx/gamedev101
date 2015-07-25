@@ -10,7 +10,9 @@ public class Sprite {
 
 	public int[] pixels;
 
-	public static Sprite grass = new Sprite(16, 5, 3, SpriteSheet.tiles);
+	public static Sprite grass = new Sprite(16, 16, 4, SpriteSheet.tiles);
+	public static Sprite flower = new Sprite(16, 21, 15, SpriteSheet.tiles);
+	public static Sprite rock = new Sprite(16, 12, 4, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x1b34f2);
 
 	private final static int PLAYER_POSITION_X = 4;

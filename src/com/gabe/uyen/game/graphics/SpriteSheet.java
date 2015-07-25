@@ -12,7 +12,8 @@ public class SpriteSheet {
 	public final int SIZE;
 	public int[] pixels;
 
-	public static SpriteSheet tiles = new SpriteSheet("/textures/terr.png", 256);
+	public static SpriteSheet tiles = new SpriteSheet("/textures/map.jpg", 384);
+	//public static SpriteSheet tiles2 = new SpriteSheet("/textures/terrain.png", 256);
 	public static SpriteSheet characters = new SpriteSheet("/textures/monsters.gif", 384);
 
 	public SpriteSheet(String path, int size) {

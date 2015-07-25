@@ -3,7 +3,6 @@ package com.gabe.uyen.game.graphics;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.gabe.uyen.game.entity.mob.Player;
 import com.gabe.uyen.game.level.tile.Tile;
 
 public class Screen {
@@ -37,6 +36,8 @@ public class Screen {
 		xp -= xOffset;
 		yp -= yOffset;
 
+		System.out.println("Tile: " + tile.getClass().getName());
+
 		for (int y = 0; y < tile.sprite.SIZE; ++y) {
 			int ya = y + yp;
 			if (ya < 0 || ya >= height) continue;
@@ -46,6 +47,7 @@ public class Screen {
 				if (xa < 0 || xa >= width) continue;
 
 				pixels[ya * width + xa] = tile.sprite.pixels[y * tile.sprite.SIZE + x];
+
 			}
 		}
 	}
@@ -63,8 +65,8 @@ public class Screen {
 				if (xa < 0 || xa >= width) continue;
 
 				int playerColor = sprite.pixels[y * 32 + x];
-				
-				if(playerColor != 0x00ffffff) pixels[ya * width + xa] = playerColor;
+
+				if (playerColor != 0x00ffffff) pixels[ya * width + xa] = playerColor;
 			}
 		}
 
