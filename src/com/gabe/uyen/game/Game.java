@@ -13,7 +13,7 @@ import com.gabe.uyen.game.entity.mob.Player;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.input.Keyboard;
 import com.gabe.uyen.game.level.Level;
-import com.gabe.uyen.game.level.RandomLevel;
+import com.gabe.uyen.game.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable {
 
@@ -44,8 +44,8 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new RandomLevel(64, 64);
-		player = new Player(key);
+		level = new SpawnLevel("/textures/level.png");
+		player = new Player(16*4,16*8,key);
 
 		addKeyListener(key);
 

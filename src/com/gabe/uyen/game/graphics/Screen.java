@@ -36,8 +36,6 @@ public class Screen {
 		xp -= xOffset;
 		yp -= yOffset;
 
-		System.out.println("Tile: " + tile.getClass().getName());
-
 		for (int y = 0; y < tile.sprite.SIZE; ++y) {
 			int ya = y + yp;
 			if (ya < 0 || ya >= height) continue;
