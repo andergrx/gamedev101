@@ -15,7 +15,7 @@ public abstract class Mob extends Entity {
 		if (yMove > 0) dir = 2;
 		if (yMove < 0) dir = 0;
 
-		if (!collision()) {
+		if (!collision(xMove, yMove)) {
 			x += xMove;
 			y += yMove;
 		}
@@ -29,7 +29,11 @@ public abstract class Mob extends Entity {
 
 	}
 
-	private boolean collision() {
-		return false;
+	private boolean collision(int xa, int ya) {
+		boolean solid = false;
+
+		if (level.getTile((x + xa) / 16, (y + ya) / 16).solid()) solid = true;
+
+		return solid;
 	}
 }

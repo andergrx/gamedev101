@@ -14,6 +14,10 @@ public abstract class Entity {
 	
 	private boolean removed = false;
 	
+	public void init(Level level) {
+		this.level = level;
+	}
+	
 	public void update() {
 		
 	}
