@@ -13,7 +13,7 @@ import com.gabe.uyen.game.entity.mob.Player;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.input.Keyboard;
 import com.gabe.uyen.game.level.Level;
-import com.gabe.uyen.game.level.SpawnLevel;
+import com.gabe.uyen.game.level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable {
 
@@ -44,8 +44,9 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new SpawnLevel("/levels/Spawn.png");
-		player = new Player(16*4,16*8,key);
+		level = Level.spawn;
+		TileCoordinate playerSpawn = new TileCoordinate(20,67);
+		player = new Player(playerSpawn.getX(),playerSpawn.getY(),key);
 
 		addKeyListener(key);
 

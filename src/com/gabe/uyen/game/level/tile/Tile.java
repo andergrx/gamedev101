@@ -25,12 +25,12 @@ public class Tile {
 	public static Tile spawnWall2 = new SpawnWallTile(Sprite.spawnWall2);
 	public static Tile spawnFloor = new SpawnFloorTile(Sprite.spawnFloor);
 	
-	public static final int SPAWN_GRASS_COLOR = 0xff00ff00;
-	public static final int SPAWN_HEDGE_COLOR = 0;
-	public static final int SPAWN_WATER_COLOR = 0;
-	public static final int SPAWN_WALL1_COLOR = 0xff6c6c6c;
-	public static final int SPAWN_WALL2_COLOR = 0xff000000;
-	public static final int SPAWN_FLOOR_COLOR = 0xff432301;
+	public static final int SPAWN_GRASS_COLOR = 0x00ff00;
+	public static final int SPAWN_HEDGE_COLOR = 0xffffff;
+	public static final int SPAWN_WATER_COLOR = 0xffffff;
+	public static final int SPAWN_WALL1_COLOR = 0x6c6c6c;
+	public static final int SPAWN_WALL2_COLOR = 0x000000;
+	public static final int SPAWN_FLOOR_COLOR = 0x432301;
 	
 	
 	public Tile(Sprite sprite) {
@@ -38,7 +38,7 @@ public class Tile {
 	}
 	
 	public void render(int x, int y, Screen screen) {
-		
+		screen.renderTile(x << 4, y << 4, this);
 	}
 	
 	public boolean solid() {
