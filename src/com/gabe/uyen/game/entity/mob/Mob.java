@@ -36,7 +36,7 @@ public abstract class Mob extends Entity {
 		boolean solid = false;
 
 		for (int c = 0; c < 4; ++c) {
-			int xt = ((x + xa) + c % 2 * 12 - 6) >> 4;
+			int xt = ((x + xa) + c % 2 * 14 - 7) >> 4;
 			int yt = ((y + ya) + c / 2 * 12 + 3) >> 4;
 
 			if (level.getTile(xt, yt).solid()) solid = true;
