@@ -1,8 +1,10 @@
 package com.gabe.uyen.game.entity.mob;
 
+import com.gabe.uyen.game.Game;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.graphics.Sprite;
 import com.gabe.uyen.game.input.Keyboard;
+import com.gabe.uyen.game.input.Mouse;
 
 public class Player extends Mob {
 
@@ -23,6 +25,16 @@ public class Player extends Mob {
 		sprite = Sprite.player_up;
 	}
 
+	private void updateShooting() {
+
+		if (Mouse.getButton() == 1) {
+			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+			double dirAngle = Math.atan2(dy, dx);
+			shoot(x, y, dirAngle);
+		}
+	}
+
 	public void update() {
 		int xa = 0, ya = 0;
 
@@ -41,6 +53,7 @@ public class Player extends Mob {
 			walking = false;
 		}
 
+		updateShooting();
 	}
 
 	public void render(Screen screen) {

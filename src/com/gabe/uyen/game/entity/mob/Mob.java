@@ -1,6 +1,11 @@
 package com.gabe.uyen.game.entity.mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gabe.uyen.game.entity.Entity;
+import com.gabe.uyen.game.entity.projectile.PlayerProjectile;
+import com.gabe.uyen.game.entity.projectile.Projectile;
 import com.gabe.uyen.game.graphics.Sprite;
 
 public abstract class Mob extends Entity {
@@ -8,6 +13,8 @@ public abstract class Mob extends Entity {
 	protected Sprite sprite;
 	protected int dir = 0;
 	protected boolean moving = false;
+	
+	protected List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public void move(int xMove, int yMove) {
 		if (xMove > 0) dir = 1;
@@ -30,6 +37,15 @@ public abstract class Mob extends Entity {
 
 	public void render() {
 
+	}
+
+	protected void shoot(int x, int y, double dir) {
+		//System.out.println("Angle: " + Math.toDegrees(dir));
+		//dir = Math.toDegrees(dir);
+		Projectile p = new PlayerProjectile(x,y,dir);
+		projectiles.add(p);
+		level.add(p);
+		
 	}
 
 	private boolean collision(int xa, int ya) {

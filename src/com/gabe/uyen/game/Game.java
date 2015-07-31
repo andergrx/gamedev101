@@ -1,7 +1,9 @@
 package com.gabe.uyen.game;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -12,6 +14,7 @@ import javax.swing.JFrame;
 import com.gabe.uyen.game.entity.mob.Player;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.input.Keyboard;
+import com.gabe.uyen.game.input.Mouse;
 import com.gabe.uyen.game.level.Level;
 import com.gabe.uyen.game.level.TileCoordinate;
 
@@ -19,9 +22,9 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static int width = 300;
-	public static int height = width / 16 * 9;
-	public static int scale = 3;
+	private static int width = 300;
+	private static int height = width / 16 * 9;
+	private static int scale = 3;
 	public static String title = "GabeUyen";
 
 	private Thread gameThread;
@@ -45,12 +48,22 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = Level.spawn;
-		TileCoordinate playerSpawn = new TileCoordinate(20,67);
-		player = new Player(playerSpawn.getX(),playerSpawn.getY(),key);
+		TileCoordinate playerSpawn = new TileCoordinate(20, 67);
+		player = new Player(playerSpawn.getX(), playerSpawn.getY(), key);
 		player.init(level);
 
+		Mouse mouse = new Mouse();
 		addKeyListener(key);
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+	}
 
+	public static int getWindowWidth() {
+		return width * scale;
+	}
+
+	public static int getWindowHeight() {
+		return height * scale;
 	}
 
 	public synchronized void start() {
@@ -103,6 +116,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void update() {
+		level.update();
 		key.update();
 		player.update();
 
@@ -125,6 +139,10 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bstrat.getDrawGraphics();
 
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Verdana", 0, 50));
+		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64);
+		//if (Mouse.getButton() != -1) g.drawString("Button: " + Mouse.getButton(), 80, 80);
 		g.dispose();
 		bstrat.show();
 	}

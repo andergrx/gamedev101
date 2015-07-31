@@ -8,7 +8,6 @@ public class RandomLevel extends Level {
 
 	public RandomLevel(int width, int height) {
 		super(width, height);
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void generateLevel() {
