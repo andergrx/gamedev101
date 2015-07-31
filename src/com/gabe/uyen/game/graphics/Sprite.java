@@ -25,7 +25,7 @@ public class Sprite {
 	public static Sprite spawnWall2 = new Sprite(16, 0, 1, SpriteSheet.spawnLevel2);
 	public static Sprite spawnFloor = new Sprite(16, 6, 5, SpriteSheet.spawnLevel2);
 
-	private final static int PLAYER_POSITION_X = 4;
+	private final static int PLAYER_POSITION_X = 7;
 	private final static int PLAYER_POSITION_Y = 0;
 
 	public static Sprite player_up = new Sprite(32, PLAYER_POSITION_X, PLAYER_POSITION_Y + 3, SpriteSheet.characters);
