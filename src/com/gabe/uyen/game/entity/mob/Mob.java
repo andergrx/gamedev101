@@ -14,8 +14,6 @@ public abstract class Mob extends Entity {
 	protected int dir = 0;
 	protected boolean moving = false;
 	
-	protected List<Projectile> projectiles = new ArrayList<Projectile>();
-
 	public void move(int xMove, int yMove) {
 		if (xMove > 0) dir = 1;
 		if (xMove < 0) dir = 3;
@@ -43,8 +41,7 @@ public abstract class Mob extends Entity {
 		//System.out.println("Angle: " + Math.toDegrees(dir));
 		//dir = Math.toDegrees(dir);
 		Projectile p = new PlayerProjectile(x,y,dir);
-		projectiles.add(p);
-		level.add(p);
+		level.addProjectile(p);
 		
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.gabe.uyen.game.entity.Entity;
+import com.gabe.uyen.game.entity.projectile.Projectile;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.level.tile.Tile;
 
@@ -15,6 +16,7 @@ public class Level {
 	public static Level spawn = new SpawnLevel("/levels/Spawn.png");
 
 	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -36,10 +38,18 @@ public class Level {
 	protected void loadLevel(String path) {
 
 	}
+	
+	public List<Projectile> getProjectiles() {
+		return projectiles;
+	}
 
 	public void update() {
 		for (int i = 0; i < entities.size(); ++i) {
 			entities.get(i).update();
+		}
+		
+		for (int i = 0; i < projectiles.size(); ++i) {
+			projectiles.get(i).update();
 		}
 	}
 
@@ -63,11 +73,19 @@ public class Level {
 		for (int i = 0; i < entities.size(); ++i) {
 			entities.get(i).render(screen);
 		}
+		
+		for (int i = 0; i < projectiles.size(); ++i) {
+			projectiles.get(i).render(screen);
+		}
 
 	}
 
 	public void add(Entity e) {
 		entities.add(e);
+	}
+	
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
 	}
 
 	public Tile getTile(int x, int y) {

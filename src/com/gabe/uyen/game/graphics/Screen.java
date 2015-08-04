@@ -3,6 +3,7 @@ package com.gabe.uyen.game.graphics;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.gabe.uyen.game.entity.projectile.Projectile;
 import com.gabe.uyen.game.level.tile.Tile;
 
 public class Screen {
@@ -50,20 +51,20 @@ public class Screen {
 		}
 	}
 
-	public void renderTile(int xp, int yp, Sprite sprite) {
+	public void renderProjectile(int xp, int yp, Projectile p) {
 		xp -= xOffset;
 		yp -= yOffset;
 
-		for (int y = 0; y < sprite.SIZE; ++y) {
+		for (int y = 0; y < p.getSpriteSize(); ++y) {
 			int ya = y + yp;
 			if (ya < 0 || ya >= height) continue;
 
-			for (int x = 0; x < sprite.SIZE; ++x) {
+			for (int x = 0; x < p.getSpriteSize(); ++x) {
 				int xa = x + xp;
 				if (xa < 0 || xa >= width) continue;
 
-				pixels[ya * width + xa] = sprite.pixels[y * sprite.SIZE + x];
-
+				int color = p.getSprite().pixels[y * p.getSpriteSize() + x];
+				if (color != 0xffff00ff) pixels[ya * width + xa] = color;
 			}
 		}
 	}

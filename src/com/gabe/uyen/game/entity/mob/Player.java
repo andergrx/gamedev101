@@ -1,6 +1,7 @@
 package com.gabe.uyen.game.entity.mob;
 
 import com.gabe.uyen.game.Game;
+import com.gabe.uyen.game.entity.projectile.Projectile;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.graphics.Sprite;
 import com.gabe.uyen.game.input.Keyboard;
@@ -35,6 +36,13 @@ public class Player extends Mob {
 		}
 	}
 
+	private void clear() {
+		for (int i = 0; i < level.getProjectiles().size(); ++i) {
+			Projectile p = level.getProjectiles().get(i);
+			if (p.isRemoved()) level.getProjectiles().remove(i);
+		}
+	}
+
 	public void update() {
 		int xa = 0, ya = 0;
 
@@ -53,6 +61,7 @@ public class Player extends Mob {
 			walking = false;
 		}
 
+		clear();
 		updateShooting();
 	}
 
