@@ -1,6 +1,7 @@
 package com.gabe.uyen.game.entity.mob;
 
 import com.gabe.uyen.game.Game;
+import com.gabe.uyen.game.entity.projectile.PlayerProjectile;
 import com.gabe.uyen.game.entity.projectile.Projectile;
 import com.gabe.uyen.game.graphics.Screen;
 import com.gabe.uyen.game.graphics.Sprite;
@@ -13,7 +14,9 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking = false;
-
+	
+	private int fireRate = 0;
+	
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player_up;
@@ -24,15 +27,17 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player_up;
+		fireRate = PlayerProjectile.FIRE_RATE;
 	}
 
 	private void updateShooting() {
 
-		if (Mouse.getButton() == 1) {
+		if (Mouse.getButton() == 1 && fireRate == 0) {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dirAngle = Math.atan2(dy, dx);
 			shoot(x, y, dirAngle);
+			fireRate = PlayerProjectile.FIRE_RATE;
 		}
 	}
 
@@ -46,6 +51,8 @@ public class Player extends Mob {
 	public void update() {
 		int xa = 0, ya = 0;
 
+		if(fireRate > 0) fireRate--;
+		
 		if (anim < 65536) ++anim;
 		else anim = 0;
 

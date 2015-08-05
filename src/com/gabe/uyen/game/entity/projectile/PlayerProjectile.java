@@ -5,12 +5,13 @@ import com.gabe.uyen.game.graphics.Sprite;
 
 public class PlayerProjectile extends Projectile {
 
+	public static final int FIRE_RATE = 10; // Higher value is slower
+
 	public PlayerProjectile(int x, int y, double dir) {
 		super(x, y, dir);
 		range = 200;
 		speed = 4;
 		damage = 20;
-		rateOfFire = 15;
 		sprite = Sprite.projectilePlayer;
 
 		nx = speed * Math.cos(angle);
@@ -18,6 +19,8 @@ public class PlayerProjectile extends Projectile {
 	}
 
 	public void update() {
+		if (level.tileCollision(x, y, nx, ny, 8)) remove();
+			
 		move();
 	}
 
@@ -26,7 +29,7 @@ public class PlayerProjectile extends Projectile {
 		y += ny;
 
 		if (distance() > range) remove();
-		//System.out.println("Distance: " + distance());
+		// System.out.println("Distance: " + distance());
 	}
 
 	private double distance() {
